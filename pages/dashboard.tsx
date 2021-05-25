@@ -1,6 +1,11 @@
 import { useSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
 
+// options to add information to your profile
+// need to figure out how to write mutations or use typeORM to add content to database
+
+// customize profile section
+
 const Dashboard = () => {
   const [session, loading] = useSession()
   const router = useRouter()
