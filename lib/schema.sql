@@ -37,6 +37,7 @@ CREATE TABLE users
     email          VARCHAR(255),
     email_verified TIMESTAMP(6),
     image          VARCHAR(255),
+
     created_at     TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     updated_at     TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     PRIMARY KEY (id)
