@@ -1,10 +1,12 @@
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
 import { getMockUsers, getMockPosts, getAllMockPosts } from '../lib/mockData'
-import Highlighter from 'react-highlight-words'
 
 import styles from '../styles/dashboard.module.scss'
+
+import Post from '../components/Post'
 
 // add posts pagination
 
@@ -51,6 +53,7 @@ const Dashboard = () => {
     searchPosts(query, allPosts).then((data) => setFilteredPosts(data))
   }, [setQuery, query])
 
+  // session check for user access to content
   if (loading) return null
 
   if (!session) router.push('/')
@@ -59,9 +62,7 @@ const Dashboard = () => {
   return (
     <div className={styles.wrapper}>
       <header className={styles.mainHead}>
-        {' '}
-        <h1>{session.user.name}</h1>
-        <p>YAAASSSSSS</p>
+        <img src="/lone_fisherman.jpeg" alt="fishing hero image" />
       </header>
       <nav className={styles.mainNav}>
         <ul className={styles.navItems}>
@@ -69,7 +70,7 @@ const Dashboard = () => {
           <li>doin good!</li>
         </ul>
       </nav>
-      <article className={styles.content}>
+      <section className={styles.content}>
         <h2>Posts</h2>
         <input
           type="text"
@@ -80,31 +81,17 @@ const Dashboard = () => {
         <br />
 
         <button onClick={incrementPage}>More Posts</button>
+
         {filteredPosts
           ? filteredPosts.map((post) => {
-              return (
-                <section key={post.id}>
-                  <h3>
-                    <Highlighter
-                      searchWords={[query]}
-                      textToHighlight={post.title}
-                    />
-                  </h3>
-                  <p>{post.body}</p>
-                </section>
-              )
+              return <Post key={post.id} post={post} query={query} />
             })
           : !posts
           ? 'Loading ...'
           : posts.map((post) => {
-              return (
-                <section key={post.id}>
-                  <h3>{post.title}</h3>
-                  <p>{post.body}</p>
-                </section>
-              )
+              return <Post key={post.id} post={post} query={null} />
             })}
-      </article>
+      </section>
       <aside className={styles.side}>
         {!users ? (
           'Loading...'
