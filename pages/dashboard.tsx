@@ -7,6 +7,7 @@ import { getMockUsers, getMockPosts, getAllMockPosts } from '../lib/mockData'
 import styles from '../styles/dashboard.module.scss'
 
 import Post from '../components/Post'
+import CreatePost from '../components/CreatePost'
 
 // add posts pagination
 
@@ -31,7 +32,7 @@ const Dashboard = () => {
   const [query, setQuery] = useState(null)
   const [allPosts, setAllPosts] = useState(null)
   const [filteredPosts, setFilteredPosts] = useState(null)
-
+  const [showCreatePost, setShowCreatePost] = useState(false)
   const [session, loading] = useSession()
   const router = useRouter()
 
@@ -65,11 +66,13 @@ const Dashboard = () => {
         <img src="/lone_fisherman.jpeg" alt="fishing hero image" />
       </header>
       <nav className={styles.mainNav}>
-        <ul className={styles.navItems}>
-          <li>hey buddy</li>
-          <li>doin good!</li>
-        </ul>
+        <button onClick={() => setShowCreatePost(!showCreatePost)}>
+          Create Post
+        </button>
       </nav>
+
+      {showCreatePost && <CreatePost open={setShowCreatePost} />}
+
       <section className={styles.content}>
         <h2>Posts</h2>
         <input

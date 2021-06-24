@@ -1,0 +1,30 @@
+.container {
+  position: absolute;
+  left: 20%;
+  top: 50%;
+  background: #f4f4f4;
+  margin: -35px -35px 0 0;
+  z-index: 20;
+  padding: 1rem;
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.inputContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem;
+  gap: 1rem;
+  label {
+    font-weight: 600;
+  }
+
+  input {
+    padding: 0.5rem 1.5rem;
+    font-size: 1.1rem;
+  }
+}

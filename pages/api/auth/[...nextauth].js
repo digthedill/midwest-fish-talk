@@ -20,6 +20,18 @@ export default NextAuth({
     }),
   ],
   database: process.env.DB_URL,
+  callbacks: {
+    session: async (session, user) => {
+      session.uid = user.uid
+      return Promise.resolve(session)
+    },
+    jwt: async (token, user, account, profile, isNewUser) => {
+      if (user) {
+        token.uid = user.id
+      }
+      return Promise.resolve(token)
+    },
+  },
   // adapter: Adapters.TypeORM.Adapter(process.env.DB_URL, {
   //   models: {
   //     User: Models.User,
